@@ -11,6 +11,7 @@ declare global {
 @UntilDestroy()
 @Component({
   selector: 'app-root',
+  // todo: add the loading indicator
   template: '<div #mdcf></div>',
   styleUrls: [],
 })
@@ -21,15 +22,17 @@ export class AppComponent implements AfterViewInit {
 
   scriptIsLoaded$ = new BehaviorSubject(false);
 
+  // todo: config and method should be passed in as inputs
   config = {
     language: 'de',
     calendarId: '2Mlnpm0763B9kNeyJeni',
   };
-
   method = 'calendar';
 
   constructor() {
     var head = document.head;
+
+    // todo: move this into a service that ensures that the script is only loaded once
 
     fetch('https://digital-campaign-factory.migros.ch/api/version')
       .then((response) => response.json())
